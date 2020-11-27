@@ -1,1 +1,57 @@
-console.log('Hello world');
+import "reflect-metadata";
+import { createConnection, ConnectionOptions } from 'typeorm';
+import Express from 'express';
+
+import ExpressSession from 'express-session';
+import Compression from 'compression';
+import History from 'connect-history-api-fallback';
+import ConnectRedis = require('connect-redis');
+
+import { DB as Config } from './Config';
+
+import { LoginRoute } from './Routes/LoginRoute';
+import { UserRoute } from './Routes/UserRoute';
+
+import { APIMiddleware } from './Middleware/APIMiddleware';
+
+var RedisStore = ConnectRedis(ExpressSession);
+const app = Express();
+
+app.set('trust proxy', true);
+app.disable('x-powered-by');
+
+app.use(History());
+app.use(Express.json());
+app.use(Express.urlencoded({ extended: true }));
+
+app.use(ExpressSession(
+    {
+        //store: new RedisStore(Config.Redis),
+        name: 'sid',
+        secret: 'instect129832@!#@!',
+        cookie:
+        {
+            secure: (process.env.NODE_ENV == "debug" ? false : true),
+            maxAge: 3600000
+        },
+        proxy: true,
+        saveUninitialized: false,
+        resave: false
+    }));
+
+app.use(Compression());
+//app.use(ExpressValidator());
+
+app.use(Express.static('public'));
+
+app.use(LoginRoute);
+app.use(UserRoute);
+
+app.use(APIMiddleware());
+
+createConnection(Config.SQL as ConnectionOptions).then(async (Connection) =>
+{
+    app.listen(3000, () => { console.log("Listening"); });
+}).catch(Error => {
+    console.error(`Database connection error: ${Error}`);
+});
