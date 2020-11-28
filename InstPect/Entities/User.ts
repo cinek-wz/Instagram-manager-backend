@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
 
 @Entity("Users")
-export class User
+export default class User
 {
     @PrimaryGeneratedColumn()
     id: number;

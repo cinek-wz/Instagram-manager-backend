@@ -1,7 +1,7 @@
 import { getRepository } from "typeorm";
 import { createHash } from "crypto";
 
-import { User } from "../Entities/User";
+import User from "../Entities/User";
 import ErrorEx from "../Utils/Error";
 
 export async function Register(Login: string, Password: string, Email: string)

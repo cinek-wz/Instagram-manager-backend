@@ -1,3 +1,5 @@
+import User from './Entities/User';
+
 export const Captcha =
 {
     Enabled: false,
@@ -16,7 +18,7 @@ export const DB =
         database: process.env.SQL_DATABASE,
         synchronize: true,
         logging: false,
-        entities: []
+        entities: [ User ]
     },
     Redis:
     {
