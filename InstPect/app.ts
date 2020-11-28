@@ -14,6 +14,7 @@ import { LoginRoute } from './Routes/LoginRoute';
 import { UserRoute } from './Routes/UserRoute';
 
 import { APIMiddleware } from './Middleware/APIMiddleware';
+import RateLimitMiddleware from "./Middleware/RateLimitMiddleware";
 
 var RedisStore = ConnectRedis(ExpressSession);
 const app = Express();
@@ -43,6 +44,7 @@ app.use(ExpressSession(
 app.use(Compression());
 //app.use(ExpressValidator());
 
+app.use(RateLimitMiddleware);
 app.use(Express.static('public'));
 
 app.use(LoginRoute);
