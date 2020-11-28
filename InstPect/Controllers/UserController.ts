@@ -22,7 +22,8 @@ export async function GetProfile(req, res, next)
     }
 }
 
-export async function ChangePassword(req, res, next) {
+export async function ChangePassword(req, res, next)
+{
     try
     {
         let UserID = req.session.userid;
@@ -35,7 +36,34 @@ export async function ChangePassword(req, res, next) {
     }
     catch (Error)
     {
-        console.error(`Error (ChangePassword): ${Error}`);
+        switch (Error.code)
+        {
+            //Current password is wrong
+            case 0:
+                return next(new APIStatus(401));
+            default:
+                console.error(`Error (ChangePassword): ${Error}`);
+                return next(new APIStatus(500));
+        }
+    }
+}
+
+export async function ModifyProfile(req, res, next)
+{
+    try
+    {
+        let UserID = req.session.userid;
+
+        //New profile data
+        let NewEmail = req.body.email;
+
+        await UserModel.ModifyProfile(UserID, NewEmail);
+
+        return next(new APIStatus(200));
+    }
+    catch (Error)
+    {
+        console.error(`Error (ModifyProfile): ${Error}`);
         return next(new APIStatus(500));
     }
 }

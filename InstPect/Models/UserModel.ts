@@ -23,15 +23,30 @@ export async function GetUserProfile(UserID: string) : Promise<Object>
 export async function ChangePassword(UserID: number, Password: Buffer, NewPassword: Buffer): Promise<void>
 {
     let Repository = getRepository(User);
-    let Account: User = await Repository.findOne({ select: ["id"], where: { id: UserID, password: Password } });
+    let Account: User = await Repository.findOne({ select: ["password"], where: { id: UserID } });
 
-    if (Account)
+    if (Account && Account.password == Password)
     {
         Account.password = NewPassword;
         await Repository.save(Account);
     }
     else
     {
+        throw new ErrorEx(0);
+    }
+}
+
+export async function ModifyProfile(UserID: number, Email: string): Promise<void>
+{
+    let Repository = getRepository(User);
+    let Account: User = await Repository.findOne({ select: ["id", "email"], where: { id: UserID } });
+
+    if (Account)
+    {
+        Account.email = Email;
+        await Repository.save(Account);
+    }
+    else {
         throw new Error();
     }
 }

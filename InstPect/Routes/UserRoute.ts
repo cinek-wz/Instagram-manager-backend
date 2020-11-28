@@ -20,6 +20,9 @@ Router.post('/api/user/changepassword', [
     InputMiddleware, UserController.ChangePassword);
 
 
-//Router.post('/api/user/profile', UserController.ModifyProfile);
+Router.post('/api/user/profile', [
+    check('email').isString().isEmail().isLength({ min: 3, max: 50 })
+    ],
+    InputMiddleware, UserController.ModifyProfile);
 
 export { Router as UserRoute };
