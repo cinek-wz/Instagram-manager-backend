@@ -1,0 +1,3 @@
+C:\Users\axlii\Desktop\InstPect\InstPect\obj\Debug\InstPect.njsprojAssemblyReference.cache
+C:\Users\axlii\Desktop\InstPect\InstPect\obj\Debug\InstPect.njsproj.CoreCompileInputs.cache
+C:\Users\axlii\Desktop\InstPect\InstPect\bin\Microsoft.NodejsTools.WebRole.dll

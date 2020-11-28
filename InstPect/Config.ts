@@ -1,3 +1,9 @@
+export const Captcha =
+{
+    Enabled: false,
+    SecretKey: process.env.CAPTCHA_SECRETKEY
+}
+
 export const DB =
 {
     SQL:
@@ -11,5 +17,11 @@ export const DB =
         synchronize: true,
         logging: false,
         entities: []
+    },
+    Redis:
+    {
+        host: process.env.REDIS_HOST,
+        port: 6379,
+        db: 5
     }
 }

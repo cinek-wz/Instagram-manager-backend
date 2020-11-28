@@ -1,5 +1,7 @@
 import { getRepository } from "typeorm";
-import { User } from "../DB/Entities/Users";
+import { createHash } from "crypto";
+
+import { User } from "../Entities/User";
 import ErrorEx from "../Utils/Error";
 
 export async function Register(Login: string, Password: string, Email: string)
@@ -10,9 +12,12 @@ export async function Register(Login: string, Password: string, Email: string)
     
     if(Exists == null)
     {
+        let HashedPassword = createHash('sha1').update(Password).digest();
+        console.log(`Hashed Password: ${HashedPassword}`)
+
         let NewUser = new User();
         NewUser.login = Login;
-        NewUser.password = Password;
+        NewUser.password = HashedPassword;
         NewUser.email = Email;
 
         await Repository.save(NewUser);
@@ -27,7 +32,11 @@ export async function Register(Login: string, Password: string, Email: string)
 export async function Login(Login: string, Password: string) : Promise<Object>
 {
     let Repository = getRepository(User);
-    let Account = await Repository.findOne({ select: ["id", "login", "credits", "role"], where: { login: Login, password: Password }});
+
+    let HashedPassword = createHash('sha1').update(Password).digest();
+    console.log(`Hashed Password: ${HashedPassword}`)
+
+    let Account = await Repository.findOne({ select: ["id", "login", "role"], where: { login: Login, password: HashedPassword }});
 
     if(Account)
     {

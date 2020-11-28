@@ -3,7 +3,7 @@ import { getRepository } from "typeorm";
 import Redis from "../DB/Redis";
 import ErrorEx from "../Utils/Error";
 
-import { User } from "../DB/Entities/Users";
+import { User } from "../Entities/User";
 
 export async function GetUserProfile(UserID: string) : Promise<Object>
 {
@@ -12,7 +12,7 @@ export async function GetUserProfile(UserID: string) : Promise<Object>
 
     if(Account)
     {
-        return { login: Account.login, credits: Account.credits, role: Account.role };
+        return { login: Account.login, role: Account.role };
     }
     else
     {

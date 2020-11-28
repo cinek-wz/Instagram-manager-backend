@@ -1,5 +1,5 @@
 import Express from 'express';
-import { check } from 'express-validator/check';
+import { check } from 'express-validator';
 
 import * as UserController from '../Controllers/UserController';
 

@@ -8,6 +8,7 @@ import History from 'connect-history-api-fallback';
 import ConnectRedis = require('connect-redis');
 
 import { DB as Config } from './Config';
+import Redis from './DB/Redis';
 
 import { LoginRoute } from './Routes/LoginRoute';
 import { UserRoute } from './Routes/UserRoute';
@@ -26,7 +27,7 @@ app.use(Express.urlencoded({ extended: true }));
 
 app.use(ExpressSession(
     {
-        //store: new RedisStore(Config.Redis),
+        store: new RedisStore({ client: Redis.redis }),
         name: 'sid',
         secret: 'instect129832@!#@!',
         cookie:
