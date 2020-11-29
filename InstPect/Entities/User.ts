@@ -15,9 +15,9 @@ export default class User
     @Column("varchar", { length: 30 })
     email: string;
 
-    @Column("smallint")
+    @Column("smallint", { default: 0 })
     role: number;
 
-    @Column("boolean")
+    @Column("boolean", { default: false })
     banned: boolean;
 }
