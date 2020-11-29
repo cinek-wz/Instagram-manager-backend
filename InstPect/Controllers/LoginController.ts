@@ -1,11 +1,6 @@
-import { createHash, randomBytes } from "crypto";
-import { createTransport } from 'nodemailer';
-
 import * as LoginModel from '../Models/LoginModel';
 
 import { APIStatus } from '../Middleware/APIMiddleware';
-import Redis from '../DB/Redis';
-import { SMTP } from '../Config';
 
 export async function Register(req, res, next)
 {
@@ -61,37 +56,34 @@ export async function RecoverPassword(req, res, next)
     try
     {
         let Email = req.body.email;
-        let Password = req.body.newpassword;
+        let NewPassword = req.body.newpassword;
+        let Secret = req.body.secret;
 
-        if (req.body.email != null)
+        if (Email != null)
         {
-            let Secret = createHash('sha512').update(`${Email}${randomBytes(20).toString('hex')}`).digest('hex');
-
-            //Send email
-            let transporter = createTransport(SMTP);
-            await transporter.sendMail({
-                from: '"InstPect" test@instpect.pl',
-                to: Email,
-                subject: 'InstPect - Password Recovery',
-                text: `https://instpect.pl/recovery/${Secret}`,
-
-            });
-
-            //Setup recovery secret to database
-            await Redis.set(`recovery:${Secret}`, `${Email}`);
-            await Redis.expire(`recovery:${Secret}`, 3600)
+            await LoginModel.RecoveryCreateSecret(Email);
         }
         else
         {
-
+            await LoginModel.RecoveryChangePassword(Secret, NewPassword);
         }
 
         return next(new APIStatus(200));
     }
     catch (Error)
     {
-        console.error(`Error (RecoverPassword): ${Error}`);
-        return next(new APIStatus(500));
+        switch (Error.code)
+        {
+            //Account does not exists
+            case 0:
+                return next(new APIStatus(404));
+            //Invalid Secret
+            case 1:
+                return next(new APIStatus(403));
+            default:
+                console.error(`Error (RecoverPassword): ${Error}`);
+                return next(new APIStatus(500));
+        }
     }
 }
 
