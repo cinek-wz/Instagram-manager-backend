@@ -27,3 +27,14 @@ export const DB =
         db: 5
     }
 }
+
+export const SMTP = 
+{
+    host: process.env.EMAIL_HOST,
+    port: Number(process.env.EMAIL_PORT),
+    secure: false,
+    tls:
+    {
+        rejectUnauthorized: false
+    }
+}

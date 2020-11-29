@@ -54,6 +54,9 @@ REDIS_HOST=192.168.190.148</Environment>
     <TypeScriptCompile Include="Middleware\AuthMiddleware.ts" />
     <TypeScriptCompile Include="Middleware\CaptchaMiddleware.ts" />
     <TypeScriptCompile Include="Middleware\InputMiddleware.ts" />
+    <TypeScriptCompile Include="Middleware\RateLimitMiddleware.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
     <TypeScriptCompile Include="Models\UserModel.ts" />
     <TypeScriptCompile Include="Routes\LoginRoute.ts" />

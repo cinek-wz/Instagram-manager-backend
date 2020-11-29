@@ -1,5 +1,5 @@
 import Express from 'express';
-import { check } from 'express-validator';
+import { check, oneOf } from 'express-validator';
 
 import * as LoginController from '../Controllers/LoginController';
 
@@ -18,7 +18,13 @@ Router.post('/api/register', [
 Router.post('/api/login', [ 
     check('login').isString().isLength({ min: 2, max: 50 }), 
     check('password').isString().isLength({ min: 3, max: 50 }) 
-    ], InputMiddleware, CaptchaMiddleware, LoginController.Login);
+], InputMiddleware, CaptchaMiddleware, LoginController.Login);
+
+Router.post('/api/user/recoverypassword', oneOf([
+    [check('email').isString().isEmail().isLength({ min: 3, max: 50 }), check('secret').not().exists()],
+    [check('secret').isString().isLength({ min: 128, max: 128 }), check('newpassword').isString().isLength({ min: 3, max: 50 }), check('email').not().exists()]
+]),
+    InputMiddleware, LoginController.RecoverPassword);
 
 Router.get('/api/logout', LoginController.Logout);
 

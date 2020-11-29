@@ -1,5 +1,5 @@
 import Express from 'express';
-import { check } from 'express-validator';
+import { check, oneOf } from 'express-validator';
 
 import * as UserController from '../Controllers/UserController';
 
@@ -18,7 +18,6 @@ Router.post('/api/user/changepassword', [
     check('newpassword').isString().isLength({ min: 3, max: 50 })
     ],
     InputMiddleware, UserController.ChangePassword);
-
 
 Router.post('/api/user/profile', [
     check('email').isString().isEmail().isLength({ min: 3, max: 50 })

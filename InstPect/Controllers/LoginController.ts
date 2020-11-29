@@ -1,6 +1,11 @@
+import { createHash, randomBytes } from "crypto";
+import { createTransport } from 'nodemailer';
+
 import * as LoginModel from '../Models/LoginModel';
 
 import { APIStatus } from '../Middleware/APIMiddleware';
+import Redis from '../DB/Redis';
+import { SMTP } from '../Config';
 
 export async function Register(req, res, next)
 {
@@ -48,6 +53,45 @@ export async function Login(req, res, next)
                 console.error(`Error (Login): ${Error}`);
                 return next(new APIStatus(500));
         }
+    }
+}
+
+export async function RecoverPassword(req, res, next)
+{
+    try
+    {
+        let Email = req.body.email;
+        let Password = req.body.newpassword;
+
+        if (req.body.email != null)
+        {
+            let Secret = createHash('sha512').update(`${Email}${randomBytes(20).toString('hex')}`).digest('hex');
+
+            //Send email
+            let transporter = createTransport(SMTP);
+            await transporter.sendMail({
+                from: '"InstPect" test@instpect.pl',
+                to: Email,
+                subject: 'InstPect - Password Recovery',
+                text: `https://instpect.pl/recovery/${Secret}`,
+
+            });
+
+            //Setup recovery secret to database
+            await Redis.set(`recovery:${Secret}`, `${Email}`);
+            await Redis.expire(`recovery:${Secret}`, 3600)
+        }
+        else
+        {
+
+        }
+
+        return next(new APIStatus(200));
+    }
+    catch (Error)
+    {
+        console.error(`Error (RecoverPassword): ${Error}`);
+        return next(new APIStatus(500));
     }
 }
 
