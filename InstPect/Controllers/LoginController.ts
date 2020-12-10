@@ -34,7 +34,7 @@ export async function Login(req, res, next)
         {
             req.session.userid = Account.id;
 
-            return next(new APIStatus(200, { login: Account.login, credits: Account.credits, role: Account.role }));
+            return next(new APIStatus(200, { login: Account.login, role: Account.role }));
         }
     }
     catch(Error)
