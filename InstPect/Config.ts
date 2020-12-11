@@ -1,4 +1,5 @@
 import User from './Entities/User';
+import InstagramAccount from './Entities/InstagramAccount';
 
 export const Captcha =
 {
@@ -18,7 +19,7 @@ export const DB =
         database: process.env.SQL_DATABASE,
         synchronize: true,
         logging: false,
-        entities: [ User ]
+        entities: [User, InstagramAccount]
     },
     Redis:
     {

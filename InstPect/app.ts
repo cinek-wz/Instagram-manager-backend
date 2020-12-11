@@ -1,7 +1,6 @@
 import "reflect-metadata";
 import { createConnection, ConnectionOptions } from 'typeorm';
 import Express from 'express';
-
 import ExpressSession from 'express-session';
 import Compression from 'compression';
 import History from 'connect-history-api-fallback';
@@ -10,8 +9,9 @@ import ConnectRedis = require('connect-redis');
 import { DB as Config } from './Config';
 import Redis from './DB/Redis';
 
-import { LoginRoute } from './Routes/LoginRoute';
-import { UserRoute } from './Routes/UserRoute';
+import LoginRoute from './Routes/LoginRoute';
+import UserRoute from './Routes/UserRoute';
+import InstagramRoute from './Routes/InstagramRoute';
 
 import { APIMiddleware } from './Middleware/APIMiddleware';
 import RateLimitMiddleware from "./Middleware/RateLimitMiddleware";
@@ -42,12 +42,12 @@ app.use(ExpressSession(
     }));
 
 app.use(Compression());
-//app.use(ExpressValidator());
 
 app.use(RateLimitMiddleware);
 app.use(Express.static('public'));
 
 app.use(LoginRoute);
+app.use(InstagramRoute);
 app.use(UserRoute);
 
 app.use(APIMiddleware());

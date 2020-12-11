@@ -4,11 +4,14 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>InstPect</Name>
     <RootNamespace>InstPect</RootNamespace>
-    <Environment>SQL_HOST=127.0.0.1
+    <Environment>NODE_ENV=debug
+SQL_HOST=127.0.0.1
 SQL_USER=root
 SQL_PASSWORD=
 SQL_DATABASE=igbot
-REDIS_HOST=192.168.185.241</Environment>
+REDIS_HOST=192.168.185.241
+INSTAGRAM_APPID=395720628212402
+INSTAGRAM_APPSECRET=285ee5632fe9e26e1ccaeccda6c62cd8</Environment>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -45,8 +48,12 @@ REDIS_HOST=192.168.185.241</Environment>
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\LoginController.ts" />
+    <TypeScriptCompile Include="Controllers\InstagramController.ts" />
     <TypeScriptCompile Include="Controllers\UserController.ts" />
     <TypeScriptCompile Include="DB\Redis.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Entities\InstagramAccount.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Entities\User.ts" />
@@ -57,9 +64,13 @@ REDIS_HOST=192.168.185.241</Environment>
     <TypeScriptCompile Include="Middleware\RateLimitMiddleware.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Models\InstagramModel.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
     <TypeScriptCompile Include="Models\UserModel.ts" />
     <TypeScriptCompile Include="Routes\LoginRoute.ts" />
+    <TypeScriptCompile Include="Routes\InstagramRoute.ts" />
     <TypeScriptCompile Include="Routes\UserRoute.ts" />
     <TypeScriptCompile Include="Utils\Error.ts" />
   </ItemGroup>

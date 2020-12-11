@@ -24,4 +24,4 @@ Router.post('/api/user/profile', [
     ],
     InputMiddleware, UserController.ModifyProfile);
 
-export { Router as UserRoute };
+export default Router;
