@@ -11,4 +11,9 @@ var Router = Express.Router();
 //Only for logged in users
 Router.use(LoggedInMiddleware);
 
+Router.post('/api/instagram/similartags', [
+    check('tag').isString().isLength({min: 1, max: 40})
+    ], InputMiddleware, InstagramController.FindSimilarTags);
+
+
 export default Router;
