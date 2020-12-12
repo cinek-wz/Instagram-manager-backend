@@ -47,8 +47,11 @@ INSTAGRAM_APPSECRET=285ee5632fe9e26e1ccaeccda6c62cd8</Environment>
     <TypeScriptCompile Include="Config.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Controllers\InstagramController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\LoginController.ts" />
-    <TypeScriptCompile Include="Controllers\InstagramController.ts" />
+    <TypeScriptCompile Include="Controllers\InstagramBaseController.ts" />
     <TypeScriptCompile Include="Controllers\UserController.ts" />
     <TypeScriptCompile Include="DB\Redis.ts">
       <SubType>Code</SubType>
@@ -64,13 +67,14 @@ INSTAGRAM_APPSECRET=285ee5632fe9e26e1ccaeccda6c62cd8</Environment>
     <TypeScriptCompile Include="Middleware\RateLimitMiddleware.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Models\InstagramModel.ts">
+    <TypeScriptCompile Include="Models\InstagramBaseModel.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
     <TypeScriptCompile Include="Models\UserModel.ts" />
-    <TypeScriptCompile Include="Routes\LoginRoute.ts" />
     <TypeScriptCompile Include="Routes\InstagramRoute.ts" />
+    <TypeScriptCompile Include="Routes\LoginRoute.ts" />
+    <TypeScriptCompile Include="Routes\InstagramBaseRoute.ts" />
     <TypeScriptCompile Include="Routes\UserRoute.ts" />
     <TypeScriptCompile Include="Utils\Error.ts" />
   </ItemGroup>

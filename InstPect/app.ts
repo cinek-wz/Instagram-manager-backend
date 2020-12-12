@@ -12,6 +12,7 @@ import Redis from './DB/Redis';
 import LoginRoute from './Routes/LoginRoute';
 import UserRoute from './Routes/UserRoute';
 import InstagramRoute from './Routes/InstagramRoute';
+import InstagramBaseRoute from './Routes/InstagramBaseRoute';
 
 import { APIMiddleware } from './Middleware/APIMiddleware';
 import RateLimitMiddleware from "./Middleware/RateLimitMiddleware";
@@ -48,6 +49,7 @@ app.use(Express.static('public'));
 
 app.use(LoginRoute);
 app.use(InstagramRoute);
+app.use(InstagramBaseRoute);
 app.use(UserRoute);
 
 app.use(APIMiddleware());
