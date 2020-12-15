@@ -1,7 +1,3 @@
-import { getRepository } from 'typeorm';
-import { createHash } from 'crypto';
-import { IgApiClient, IgCheckpointError, AccountFollowersFeed } from 'instagram-private-api';
-
 import * as InstagramBaseModel from '../Models/InstagramBaseModel';
 
 import { APIStatus } from '../Middleware/APIMiddleware';
@@ -15,24 +11,19 @@ export async function AddAccount(req, res, next)
         let Login = req.body.login;
         let Password = req.body.password;
 
-        // Check if account already exists in database
-        await InstagramBaseModel.InstagramAccountExists(Login);
+        let Data: { session: string, id: number };
 
         if (Login != null && Password != null)
         {
             req.session.igaddstate = null;
-
-            let Data: { session: string, id: number } = await InstagramBaseModel.InstagramClientLogin(Login, Password);
-            await InstagramBaseModel.InstagramAccountAdd(UserID, Login, Password, Data.id, Data.session);
+            Data = await InstagramBaseModel.InstagramClientLogin(Login, Password);
         }
         else
         {
-            let Data: { session: string, id: number } = await InstagramBaseModel.InstagramClientCodeVerification(req.session.igaddstate, Code);
+            Data = await InstagramBaseModel.InstagramClientCodeVerification(req.session.igaddstate, Code);
             req.session.igaddstate = null;
-
-            await InstagramBaseModel.InstagramAccountAdd(UserID, Login, Password, Data.id, Data.session);
         }
-
+        await InstagramBaseModel.InstagramAccountAdd(UserID, Login, Password, Data.id, Data.session);
         return next(new APIStatus(200));
     }
     catch(Error)

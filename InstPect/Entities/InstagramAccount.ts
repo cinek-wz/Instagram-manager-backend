@@ -7,8 +7,11 @@ export default class InstagramAccount {
     id: number;
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: "userid" })
-    user: User;
+        @JoinColumn({ name: "userid" })
+        user: User;
+
+        @Column({ type: "int", nullable: true })
+        userid: number;
 
     @Column("varchar", { length: 30 })
     login: string;

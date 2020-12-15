@@ -16,4 +16,10 @@ Router.post('/api/instagram/addaccount', oneOf([
     [check('code').isString().isLength({ min: 4, max: 5 })]
 ]), InputMiddleware, InstagramBaseController.AddAccount);
 
+//Remove instagram account
+
+//Disable / enable instagram account
+
+//Get all accounts with stats
+
 export default Router;
