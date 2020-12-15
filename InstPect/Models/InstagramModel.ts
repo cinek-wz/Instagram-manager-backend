@@ -49,3 +49,23 @@ export async function GetSimilarTags(InstagramClient: IgApiClient, Tag: string):
         throw new ErrorEx(2);
     }
 }
+
+export async function GetInsights(InstagramClient: IgApiClient): Promise<Object>
+{
+
+    let Insights = await InstagramClient.insights.account({
+        gridMediaSize: 256,
+        contentTab: true,
+        activityTab: true,
+        audienceTab: true,
+    });
+
+    let BusinessAccount: boolean = Insights.data.user.business_profile != null;
+
+    if (BusinessAccount == false) {
+        throw new ErrorEx(1);
+    }
+    else {
+        return JSON.stringify(Insights, null, 4);
+    }
+}

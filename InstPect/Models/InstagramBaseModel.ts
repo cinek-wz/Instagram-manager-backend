@@ -77,7 +77,7 @@ export async function GetUserInstagramAccounts(UserID: number): Promise<Array<In
     return await InstagramRepository.find({ where: { userid: UserID, enabled: true } });
 }
 
-export async function GetInstagramAccount(Account: InstagramAccount): Promise<IgApiClient>
+export async function GetInstagramAccountClient(Account: InstagramAccount): Promise<IgApiClient>
 {
     let InstagramRepository = getRepository(InstagramAccount);
 
@@ -102,5 +102,19 @@ export async function GetInstagramAccount(Account: InstagramAccount): Promise<Ig
         {
             throw new ErrorEx(1);
         }
+    }
+}
+
+export async function GetInstagramAccountByID(UserID: number, AccountID: number): Promise<InstagramAccount>
+{
+    let InstagramRepository = getRepository(InstagramAccount);
+
+    let Account: InstagramAccount = await InstagramRepository.findOne({ where: { id: AccountID, userid: UserID } });
+
+    if (Account != null) {
+        return Account;
+    }
+    else {
+        throw new ErrorEx(0);
     }
 }
