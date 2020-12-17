@@ -104,17 +104,3 @@ export async function GetInstagramAccountClient(Account: InstagramAccount): Prom
         }
     }
 }
-
-export async function GetInstagramAccountByID(UserID: number, AccountID: number): Promise<InstagramAccount>
-{
-    let InstagramRepository = getRepository(InstagramAccount);
-
-    let Account: InstagramAccount = await InstagramRepository.findOne({ where: { id: AccountID, userid: UserID } });
-
-    if (Account != null) {
-        return Account;
-    }
-    else {
-        throw new ErrorEx(0);
-    }
-}
