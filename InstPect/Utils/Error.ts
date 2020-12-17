@@ -11,4 +11,8 @@ export default class ErrorEx
         this.code = code;
         this.data = data;
     }
+
+    toString() {
+        return `${this.name} (${this.code} ${(this.data == null ? null : this.data)}`;
+    }
 }
