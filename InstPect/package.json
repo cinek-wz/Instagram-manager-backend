@@ -18,6 +18,7 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
+    "@types/multer": "^1.4.5",
     "@types/nodemailer": "^6.4.0",
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^1.6.0",
@@ -27,6 +28,7 @@
     "express-validator": "^6.7.0",
     "handy-redis": "^1.5.1",
     "instagram-private-api": "^1.43.3",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nodemailer": "^6.4.16",
     "reflect-metadata": "^0.1.13",

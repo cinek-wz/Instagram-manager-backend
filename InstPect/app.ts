@@ -9,10 +9,10 @@ import ConnectRedis = require('connect-redis');
 import { DB as Config } from './Config';
 import Redis from './DB/Redis';
 
-import LoginRoute from './Routes/LoginRoute';
+import GuestRoute from './Routes/GuestRoute';
 import UserRoute from './Routes/UserRoute';
 import InstagramRoute from './Routes/InstagramRoute';
-import InstagramBaseRoute from './Routes/InstagramBaseRoute';
+import UserInstagramAccountsRoute from './Routes/UserInstagramAccountsRoute';
 
 import { APIMiddleware } from './Middleware/APIMiddleware';
 import RateLimitMiddleware from "./Middleware/RateLimitMiddleware";
@@ -47,9 +47,9 @@ app.use(Compression());
 app.use(RateLimitMiddleware);
 app.use(Express.static('public'));
 
-app.use(LoginRoute);
+app.use(GuestRoute);
 app.use(InstagramRoute);
-app.use(InstagramBaseRoute);
+app.use(UserInstagramAccountsRoute);
 app.use(UserRoute);
 
 app.use(APIMiddleware());

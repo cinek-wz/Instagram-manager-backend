@@ -2,7 +2,7 @@ import * as InstagramBaseModel from '../Models/InstagramBaseModel';
 
 import { APIStatus } from '../Middleware/APIMiddleware';
 
-export async function AddAccount(req, res, next)
+export default async function AddAccount(req, res, next)
 {
     try
     {

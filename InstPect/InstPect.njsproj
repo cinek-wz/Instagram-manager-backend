@@ -52,10 +52,14 @@ INSTAGRAM_APPSECRET=285ee5632fe9e26e1ccaeccda6c62cd8</Environment>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\LoginController.ts" />
     <TypeScriptCompile Include="Controllers\InstagramBaseController.ts" />
+    <TypeScriptCompile Include="Controllers\PhotoUpdateScheduler.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\UserController.ts" />
     <TypeScriptCompile Include="DB\Redis.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Entities\InstagramPhotos.ts" />
     <TypeScriptCompile Include="Entities\InstagramAccount.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -68,6 +72,9 @@ INSTAGRAM_APPSECRET=285ee5632fe9e26e1ccaeccda6c62cd8</Environment>
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Models\InstagramBaseModel.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Models\InstagramModel.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
