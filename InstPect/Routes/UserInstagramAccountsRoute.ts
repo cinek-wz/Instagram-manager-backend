@@ -2,6 +2,8 @@ import Express from 'express';
 import { check, oneOf } from 'express-validator';
 
 import AddInstagramAccountController from '../Controllers/AddInstagramAccountController';
+import RemoveInstagramAccountController from '../Controllers/RemoveInstagramAccountController';
+
 
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
 import OwnsInstagramAccountMiddleware from '../Middleware/OwnsInstagramAccountMiddleware';
@@ -19,7 +21,7 @@ Router.post('/api/instagram/addaccount', oneOf([
 
 Router.post('/api/instagram/removeaccount', [
     check('accountid').isInt()
-    ], InputMiddleware, OwnsInstagramAccountMiddleware, );
+], InputMiddleware, OwnsInstagramAccountMiddleware, RemoveInstagramAccountController);
 
 //Enable / disable instagram account
 Router.post('/api/instagram/accountstatus', [
