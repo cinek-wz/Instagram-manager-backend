@@ -15,7 +15,7 @@ Router.post('/api/instagram/similartags', [
     check('tag').isString().isLength({min: 1, max: 40})
     ], InputMiddleware, InstagramController.FindSimilarTags);
 
-Router.get('/api/instagram/insights', [
+Router.post('/api/instagram/insights', [
     check('accountid').isInt()
     ], InputMiddleware, InstagramController.GetInsights);
 

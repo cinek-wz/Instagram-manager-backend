@@ -19,7 +19,7 @@ export const DB =
         database: process.env.SQL_DATABASE,
         synchronize: true,
         logging: false,
-        entities: [User, InstagramAccount]
+        entities: [ "./Entities/**/*.js" ]
     },
     Redis:
     {
