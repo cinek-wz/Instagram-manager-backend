@@ -1,8 +1,9 @@
 import Express from 'express';
 import { check, oneOf } from 'express-validator';
 
-import AddInstagramAccountController from '../Controllers/AddInstagramAccountController';
-import RemoveInstagramAccountController from '../Controllers/RemoveInstagramAccountController';
+import AddAccount from '../Controllers/InstagramAccount/AddInstagramAccountController';
+import RemoveAccount from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
+import ChangeStatus from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
 
 
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
@@ -17,17 +18,17 @@ Router.use(LoggedInMiddleware);
 Router.post('/api/instagram/addaccount', oneOf([
     [check('login').isString(), check('password').isString()],
     [check('code').isString().isLength({ min: 4, max: 5 })]
-]), InputMiddleware, AddInstagramAccountController);
+]), InputMiddleware, AddAccount);
 
 Router.post('/api/instagram/removeaccount', [
     check('accountid').isInt()
-], InputMiddleware, OwnsInstagramAccountMiddleware, RemoveInstagramAccountController);
+], InputMiddleware, OwnsInstagramAccountMiddleware, RemoveAccount);
 
 //Enable / disable instagram account
 Router.post('/api/instagram/accountstatus', [
     check('accountid').isInt(),
     check('status').isBoolean()
-], InputMiddleware, OwnsInstagramAccountMiddleware, );
+], InputMiddleware, OwnsInstagramAccountMiddleware, ChangeStatus);
 
 //Get all accounts with stats
 
