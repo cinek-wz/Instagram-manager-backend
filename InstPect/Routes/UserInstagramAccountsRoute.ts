@@ -4,7 +4,7 @@ import { check, oneOf } from 'express-validator';
 import AddAccount from '../Controllers/InstagramAccount/AddInstagramAccountController';
 import RemoveAccount from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
 import ChangeStatus from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
-
+import GetAccounts from '../Controllers/InstagramAccount/GetInstagramAccountsController';
 
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
 import OwnsInstagramAccountMiddleware from '../Middleware/OwnsInstagramAccountMiddleware';
@@ -31,5 +31,6 @@ Router.post('/api/instagram/accountstatus', [
 ], InputMiddleware, OwnsInstagramAccountMiddleware, ChangeStatus);
 
 //Get all accounts with stats
+Router.post('/api/instagram/accounts', GetAccounts);
 
 export default Router;

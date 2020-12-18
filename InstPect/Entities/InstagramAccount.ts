@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, OneToMany, JoinColumn, OneToOne } from "typeorm";
 import User from "./User";
+import InstagramStats from "./InstagramStats";
 
 @Entity("instagram_accounts")
 export default class InstagramAccount {
@@ -12,6 +13,9 @@ export default class InstagramAccount {
 
         @Column({ type: "int", nullable: true })
         userid: number;
+
+    @OneToOne(() => InstagramStats, stats => stats.account )
+        stats: InstagramStats;
 
     @Column("varchar", { length: 30 })
     login: string;
