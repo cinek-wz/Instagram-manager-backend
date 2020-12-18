@@ -15,10 +15,10 @@ export default class InstagramStats {
         accountid: number;
 
     // Time checks
-    @Column("monthcheck")
+    @Column("int")
     monthcheck: number;
 
-    @Column("daycheck")
+    @Column("int")
     daycheck: number;
 
     // Monthly data
