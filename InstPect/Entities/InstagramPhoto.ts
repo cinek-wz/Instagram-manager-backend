@@ -14,7 +14,7 @@ export default class InstagramPhoto {
         @Column({ type: "int", nullable: true })
         accountid: number;
 
-    @Column("binary")
+    @Column({ type: "mediumblob" })
     photo: Buffer;
 
     @Column("datetime")
