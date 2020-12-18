@@ -1,15 +1,15 @@
-import * as InstagramModel from '../Models/InstagramModel';
-import * as InstagramBaseModel from '../Models/InstagramBaseModel';
+import * as InstagramModel from '../../Models/InstagramModel';
+import * as InstagramBaseModel from '../../Models/InstagramBaseModel';
 
 
-import { APIStatus } from '../Middleware/APIMiddleware';
-import ErrorEx from '../Utils/Error';
-import InstagramAccount from '../Entities/InstagramAccount';
-import { IgApiClient } from 'instagram-private-api';
+import { APIStatus } from '../../Middleware/APIMiddleware';
+import ErrorEx from '../../Utils/Error';
+import InstagramAccount from '../../Entities/InstagramAccount';
 
-
-export default async function FindSimilarTags(req, res, next) {
-    try {
+export default async function FindSimilarTags(req, res, next) 
+{
+    try
+    {
         let Tag = req.body.tag;
         let InstagramAccount: InstagramAccount = req.instagramaccount;
 
@@ -18,8 +18,10 @@ export default async function FindSimilarTags(req, res, next) {
 
         return next(new APIStatus(200, SimilarTags));
     }
-    catch (Error) {
-        switch (Error.code) {
+    catch (Error)
+    {
+        switch (Error.code)
+        {
             //Error with login to instagram Account
             case 1:
                 return next(new APIStatus(403));

@@ -1,6 +1,6 @@
-import * as LoginModel from '../Models/LoginModel';
+import * as LoginModel from '../../Models/LoginModel';
 
-import { APIStatus } from '../Middleware/APIMiddleware';
+import { APIStatus } from '../../Middleware/APIMiddleware';
 
 export async function Register(req, res, next)
 {

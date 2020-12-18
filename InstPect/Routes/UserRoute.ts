@@ -1,7 +1,7 @@
 import Express from 'express';
 import { check, oneOf } from 'express-validator';
 
-import * as UserController from '../Controllers/UserController';
+import * as UserController from '../Controllers/UserActions/UserController';
 
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
 import InputMiddleware from '../Middleware/InputMiddleware';

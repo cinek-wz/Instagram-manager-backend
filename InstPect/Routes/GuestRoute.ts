@@ -1,7 +1,7 @@
 import Express from 'express';
 import { check, oneOf } from 'express-validator';
 
-import * as LoginController from '../Controllers/LoginController';
+import * as LoginController from '../Controllers/GuestActions/LoginController';
 
 import InputMiddleware from '../Middleware/InputMiddleware';
 import CaptchaMiddleware from '../Middleware/CaptchaMiddleware';

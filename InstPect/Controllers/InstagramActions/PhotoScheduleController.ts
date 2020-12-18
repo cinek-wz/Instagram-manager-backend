@@ -1,11 +1,12 @@
-import { APIStatus } from '../Middleware/APIMiddleware';
-import ErrorEx from '../Utils/Error';
+import { APIStatus } from '../../Middleware/APIMiddleware';
+import ErrorEx from '../../Utils/Error';
 import { getRepository } from 'typeorm';
-import InstagramPhoto from '../Entities/InstagramPhoto';
+import InstagramPhoto from '../../Entities/InstagramPhoto';
 
 export default async function UploadPhotoSchedule(req, res, next)
 {
-    try {
+    try
+    {
         let AccountID = req.body.accountid;
         let DateTime = req.body.date;
         let Description = req.body.description;
@@ -21,8 +22,10 @@ export default async function UploadPhotoSchedule(req, res, next)
 
         await PhotoRepository.save(Photo);
     }
-    catch (Error) {
-        switch (Error.code) {
+    catch (Error)
+    {
+        switch (Error.code)
+        {
             default:
                 console.error(`Error (UploadPhotoSchedule): ${Error}`);
                 return next(new APIStatus(500));

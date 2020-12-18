@@ -1,9 +1,9 @@
-import * as InstagramModel from '../Models/InstagramModel';
-import * as InstagramBaseModel from '../Models/InstagramBaseModel';
+import * as InstagramModel from '../../Models/InstagramModel';
+import * as InstagramBaseModel from '../../Models/InstagramBaseModel';
 
-import InstagramAccount from '../Entities/InstagramAccount';
-import { APIStatus } from '../Middleware/APIMiddleware';
-import ErrorEx from '../Utils/Error';
+import InstagramAccount from '../../Entities/InstagramAccount';
+import { APIStatus } from '../../Middleware/APIMiddleware';
+import ErrorEx from '../../Utils/Error';
 import { IgApiClient } from 'instagram-private-api';
 
 

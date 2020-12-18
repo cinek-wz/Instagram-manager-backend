@@ -1,10 +1,10 @@
 import { getRepository } from 'typeorm';
 import { createHash } from 'crypto';
 
-import * as UserModel from '../Models/UserModel';
+import * as UserModel from '../../Models/UserModel';
 
-import { APIStatus } from '../Middleware/APIMiddleware';
-import User from '../Entities/User';
+import { APIStatus } from '../../Middleware/APIMiddleware';
+import User from '../../Entities/User';
 
 export async function GetProfile(req, res, next)
 {
