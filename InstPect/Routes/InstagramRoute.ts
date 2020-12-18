@@ -29,7 +29,7 @@ Router.post('/api/instagram/insights', [
 Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_photo'), [
     check('accountid').isInt(),
     check('description').isString(),
-    check('date').isDate()
+    check('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
 ], InputMiddleware, OwnsInstagramAccountMiddleware, PhotoSchedule);
 
 export default Router;

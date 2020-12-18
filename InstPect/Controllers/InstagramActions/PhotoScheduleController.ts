@@ -21,6 +21,7 @@ export default async function UploadPhotoSchedule(req, res, next)
         Photo.photo = file.buffer;
 
         await PhotoRepository.save(Photo);
+        return next(new APIStatus(200));
     }
     catch (Error)
     {
