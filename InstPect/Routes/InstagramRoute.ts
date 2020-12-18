@@ -32,4 +32,8 @@ Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_p
     check('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
 ], InputMiddleware, OwnsInstagramAccountMiddleware, PhotoSchedule);
 
+Router.post('/api/instagram/topphotos', [
+    check('accountid').isInt()
+], InputMiddleware, OwnsInstagramAccountMiddleware, ...);
+
 export default Router;
