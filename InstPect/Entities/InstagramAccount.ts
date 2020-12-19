@@ -23,8 +23,8 @@ export default class InstagramAccount {
     @Column("varchar", { length: 50 })
     password: string;
 
-    @Column("integer")
-    instagramid: number;
+    @Column("varchar", { length: 20 })
+    instagramid: string;
 
     @Column("boolean", { default: false })
     enabled: boolean;

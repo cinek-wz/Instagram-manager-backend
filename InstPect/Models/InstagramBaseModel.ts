@@ -63,7 +63,7 @@ export async function InstagramAccountAdd(UserID: number, Login: string, Passwor
     NewAccount.userid = UserID;
     NewAccount.login = Login;
     NewAccount.password = Password;
-    NewAccount.instagramid = InstagramID;
+    NewAccount.instagramid = InstagramID.toString();
     NewAccount.session = Session;
 
     await InstagramRepository.save(NewAccount);

@@ -15,24 +15,24 @@ export default class InstagramStats {
         accountid: number;
 
     // Time checks
-    @Column("int")
+    @Column("int", { nullable: true } )
     monthcheck: number;
 
-    @Column("int")
+    @Column("int", { nullable: true } )
     daycheck: number;
 
     // Monthly data
 
-    @Column("int")
+    @Column("int", { default: 0 } )
     monthfollowers: number;
 
     // Daily data
 
-    @Column("int")
+    @Column("int", { default: 0 })
     dayfollowers: number;
 
     // Current data
 
-    @Column("int")
+    @Column("int", { default: 0 })
     currentfollowers: number;
 }
