@@ -21,7 +21,7 @@ Router.use(LoggedInMiddleware);
 Router.post('/api/instagram/similartags', [
     check('accountid').isInt(),
     check('tag').isString().isLength({min: 1, max: 40})
-], InputMiddleware, OwnsInstagramAccountMiddleware, FindSimilarTags);
+], InputMiddleware, CacheMiddleware(21600, `similartags`, [{ type: "body", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
 
 Router.post('/api/instagram/insights', [
     check('accountid').isInt()
@@ -35,6 +35,6 @@ Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_p
 
 Router.post('/api/instagram/topphotos', [
     check('accountid').isInt()
-], InputMiddleware, OwnsInstagramAccountMiddleware, GetTopPhotos);
+], InputMiddleware, CacheMiddleware(43200, `topphotos`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetTopPhotos);
 
 export default Router;
