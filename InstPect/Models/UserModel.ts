@@ -12,7 +12,7 @@ export async function GetUserProfile(UserID: string) : Promise<Object>
 
     if(Account)
     {
-        return { login: Account.login, role: Account.role };
+        return { login: Account.login, email: Account.email, role: Account.role };
     }
     else
     {
