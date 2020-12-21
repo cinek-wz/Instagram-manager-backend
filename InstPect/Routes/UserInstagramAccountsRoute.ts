@@ -3,7 +3,7 @@ import { check, oneOf } from 'express-validator';
 
 import AddAccount from '../Controllers/InstagramAccount/AddInstagramAccountController';
 import RemoveAccount from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
-import ChangeStatus from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
+import ChangeStatus from '../Controllers/InstagramAccount/StatusInstagramAccountController';
 import GetAccounts from '../Controllers/InstagramAccount/GetInstagramAccountsController';
 
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
