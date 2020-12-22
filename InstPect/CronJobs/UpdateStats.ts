@@ -1,8 +1,11 @@
 import { getRepository } from 'typeorm';
 import Request from 'request-promise';
 
+import * as InstagramBaseModel from '../Models/InstagramBaseModel';
+
 import InstagramAccount from '../Entities/InstagramAccount';
 import InstagramStats from "../Entities/InstagramStats";
+import { IgApiClient } from "instagram-private-api";
 
 export default async function UpdateStats()
 {
@@ -20,10 +23,11 @@ export default async function UpdateStats()
             let CurrentMonth = CurrentDate.getUTCMonth() + 1;
             let CurrentDay = CurrentDate.getUTCDate();
 
-            let Data = await Request.get(`https://www.instagram.com/graphql/query/?query_hash=c76146de99bb02f6415203be841dd25a&variables={"id":"${Account.instagramid}","first":0}`, { json: true });
+            let Client: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(Account);
+            let User = await Client.account.currentUser();
+            let UserInfo = await Client.user.info(User.pk);
 
-            let FollowerCount = Data.data.user.edge_followed_by.count;
-
+            let FollowerCount = UserInfo.follower_count;
             if (Account.stats.monthcheck != CurrentMonth)
             {
                 Account.stats.monthfollowers = FollowerCount;
@@ -37,7 +41,6 @@ export default async function UpdateStats()
             Account.stats.currentfollowers = FollowerCount;
 
             await StatsRepository.save(Account.stats);
-            return;
         }
     }
     catch(Error)
