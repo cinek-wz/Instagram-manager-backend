@@ -36,7 +36,8 @@ export default function CacheMiddleware(ExpireTime: number, Name: string, Option
         }
         else
         {
-            return next(new APIStatus(200, Cache));
+            let CacheData = JSON.parse(Cache);
+            return next(new APIStatus(200, CacheData));
         }
     }
 }

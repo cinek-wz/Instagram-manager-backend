@@ -19,10 +19,10 @@ export function APIMiddleware()
         //Cache
         if (result.status == 200 && req.cache != null)
         {
-            await Redis.set(req.cache, result.data);
+            await Redis.set(req.cache, JSON.stringify(result.data));
             await Redis.expire(req.cache, req.cacheexpire);
 
-            console.log(`Cached at ${req.cache} TX: ${req.cacheexpire}`);
+            console.log(`Cached at ${req.cache}\nTX:${req.cacheexpire}`);
         }
 
         res.status(result.status).send((result.data != null) ? { data: result.data } : null);
