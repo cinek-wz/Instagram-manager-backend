@@ -58,8 +58,7 @@ export default async function GetTopPhotos(req, res, next)
         switch (Error.code)
         {
             default:
-                console.error(`Error (GetTopPhotos): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }

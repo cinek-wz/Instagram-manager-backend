@@ -40,8 +40,7 @@ export default async function AddAccount(req, res, next)
             case 2:
                 return next(new APIStatus(400));
             default:
-                console.error(`Error (AddAccount): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
 
     }

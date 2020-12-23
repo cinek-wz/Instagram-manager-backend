@@ -1,6 +1,6 @@
-import { APIStatus } from '../../Middleware/APIMiddleware';
-import ErrorEx from '../../Utils/Error';
 import { getRepository } from 'typeorm';
+
+import { APIStatus } from '../../Middleware/APIMiddleware';
 import InstagramPhoto from '../../Entities/InstagramPhoto';
 
 export default async function UploadPhotoSchedule(req, res, next)
@@ -28,8 +28,7 @@ export default async function UploadPhotoSchedule(req, res, next)
         switch (Error.code)
         {
             default:
-                console.error(`Error (UploadPhotoSchedule): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }

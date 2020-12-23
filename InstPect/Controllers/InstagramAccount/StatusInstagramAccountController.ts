@@ -19,7 +19,6 @@ export default async function ChangeStatus(req, res, next)
     }
     catch (Error)
     {
-        console.error(`Error (ChangeStatus): ${Error}`);
-        return next(new APIStatus(500));
+        return next(new APIStatus(500, Error));
     }
 }

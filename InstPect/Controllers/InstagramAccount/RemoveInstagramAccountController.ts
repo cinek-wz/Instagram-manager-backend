@@ -17,7 +17,6 @@ export default async function RemoveAccount(req, res, next)
     }
     catch (Error)
     {
-        console.error(`Error (RemoveAccount): ${Error}`);
-        return next(new APIStatus(500));
+        return next(new APIStatus(500, Error));
     }
 }

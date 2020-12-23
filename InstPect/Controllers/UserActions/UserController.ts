@@ -17,8 +17,7 @@ export async function GetProfile(req, res, next)
     }
     catch(Error)
     {
-        console.error(`Error (GetProfile): ${Error}`);
-        return next(new APIStatus(500));
+        return next(new APIStatus(500, Error));
     }
 }
 
@@ -42,8 +41,7 @@ export async function ChangePassword(req, res, next)
             case 0:
                 return next(new APIStatus(401));
             default:
-                console.error(`Error (ChangePassword): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }
@@ -63,7 +61,6 @@ export async function ModifyProfile(req, res, next)
     }
     catch (Error)
     {
-        console.error(`Error (ModifyProfile): ${Error}`);
-        return next(new APIStatus(500));
+        return next(new APIStatus(500, Error));
     }
 }

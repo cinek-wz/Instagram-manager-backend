@@ -18,8 +18,7 @@ export async function Register(req, res, next)
             case 0:
                 return next(new APIStatus(409));
             default:
-                console.error(`Error (Register): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }
@@ -45,8 +44,7 @@ export async function Login(req, res, next)
             case 0:
                 return next(new APIStatus(401));
             default:
-                console.error(`Error (Login): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }
@@ -81,8 +79,7 @@ export async function RecoverPassword(req, res, next)
             case 1:
                 return next(new APIStatus(403));
             default:
-                console.error(`Error (RecoverPassword): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }

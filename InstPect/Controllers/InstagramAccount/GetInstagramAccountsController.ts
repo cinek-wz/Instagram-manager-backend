@@ -22,7 +22,6 @@ export default async function GetAccounts(req, res, next)
     }
     catch (Error)
     {
-        console.error(`Error (GetAccounts): ${Error}`);
-        return next(new APIStatus(500));
+        return next(new APIStatus(500, Error));
     }
 }

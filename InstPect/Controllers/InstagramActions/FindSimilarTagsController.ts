@@ -29,8 +29,7 @@ export default async function FindSimilarTags(req, res, next)
             case 2:
                 return next(new APIStatus(503));
             default:
-                console.error(`Error (FindSimilarTags): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }

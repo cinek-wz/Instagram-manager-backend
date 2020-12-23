@@ -29,8 +29,7 @@ export default async function GetInsights(req, res, next)
             case 1:
                 return next(new APIStatus(400));
             default:
-                console.error(`Error (GetInsights): ${Error}`);
-                return next(new APIStatus(500));
+                return next(new APIStatus(500, Error));
         }
     }
 }
