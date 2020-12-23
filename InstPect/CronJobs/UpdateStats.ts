@@ -14,11 +14,10 @@ export default async function UpdateStats()
         let InstagramRepository = getRepository(InstagramAccount);
         let StatsRepository = getRepository(InstagramStats);
 
-        let AllAccounts = await InstagramRepository.find({ relations: [ "stats" ] });
+        let Accounts = await InstagramRepository.find({ relations: [ "stats" ] });
 
-        for (let i = 0; i < AllAccounts.length; i++)
+        for (let Account of Accounts)
         {
-            let Account: InstagramAccount = AllAccounts[i];
             let CurrentDate: Date = new Date();
             let CurrentMonth = CurrentDate.getUTCMonth() + 1;
             let CurrentDay = CurrentDate.getUTCDate();

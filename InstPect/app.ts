@@ -63,7 +63,6 @@ createConnection(Config.SQL as ConnectionOptions).then(async (Connection) =>
 {
     app.listen(3000, () => { console.log("Listening"); });
 
-
     // Update account stats every 15 minutes
     let StatsRunner = new CronRunner('*/15 * * * *', UpdateStats);
 
