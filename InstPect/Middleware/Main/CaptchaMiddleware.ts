@@ -1,6 +1,6 @@
 import * as Request from 'request';
-import { Captcha } from '../Config';
-import { APIStatus } from '../Middleware/APIMiddleware';
+import { Captcha } from '../../Config';
+import { APIStatus } from '../APIMiddleware';
 
 export default async function CaptchaMiddleware(req, res, next) 
 {
@@ -24,7 +24,7 @@ export default async function CaptchaMiddleware(req, res, next)
                 }
                 else
                 {
-                    return next(new APIStatus(400, "Nieprawidłowa Captcha."));
+                    return next(new APIStatus(400));
                 }
             }
         });
