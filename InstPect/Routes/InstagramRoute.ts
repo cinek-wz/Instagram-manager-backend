@@ -2,6 +2,12 @@ import Express from 'express';
 import multer from 'multer';
 import { check, oneOf } from 'express-validator';
 
+import AddAccount from '../Controllers/InstagramAccount/AddInstagramAccountController';
+import RemoveAccount from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
+import ChangeStatus from '../Controllers/InstagramAccount/StatusInstagramAccountController';
+import GetAccounts from '../Controllers/InstagramAccount/GetInstagramAccountsController';
+
+
 import PhotoSchedule from '../Controllers/InstagramActions/PhotoScheduleController';
 import GetInsights from '../Controllers/InstagramActions/GetInsightsController';
 import FindSimilarTags from '../Controllers/InstagramActions/FindSimilarTagsController';
@@ -17,6 +23,32 @@ let MulterMiddleware = multer();
 
 //Only for logged in users
 Router.use(LoggedInMiddleware);
+
+/**
+ * User instagram account
+*/
+
+Router.post('/api/instagram/addaccount', oneOf([
+    [check('login').isString(), check('password').isString()],
+    [check('code').isString().isLength({ min: 4, max: 5 })]
+]), InputMiddleware, AddAccount);
+
+Router.post('/api/instagram/removeaccount', [
+    check('accountid').isInt()
+], InputMiddleware, OwnsInstagramAccountMiddleware, RemoveAccount);
+
+//Enable / disable instagram account
+Router.post('/api/instagram/accountstatus', [
+    check('accountid').isInt(),
+    check('status').isBoolean()
+], InputMiddleware, OwnsInstagramAccountMiddleware, ChangeStatus);
+
+//Get all accounts with stats
+Router.post('/api/instagram/accounts', GetAccounts);
+
+/**
+ * User instagram account actions
+*/
 
 Router.post('/api/instagram/similartags', [
     check('accountid').isInt(),

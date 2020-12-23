@@ -16,7 +16,6 @@ import PostPhotos from './CronJobs/PostPhotos';
 import GuestRoute from './Routes/GuestRoute';
 import UserRoute from './Routes/UserRoute';
 import InstagramRoute from './Routes/InstagramRoute';
-import UserInstagramAccountsRoute from './Routes/UserInstagramAccountsRoute';
 
 import { APIMiddleware } from './Middleware/Main/APIMiddleware';
 import RateLimitMiddleware from "./Middleware/Main/RateLimitMiddleware";
@@ -53,7 +52,6 @@ app.use(Express.static('public'));
 
 app.use(GuestRoute);
 app.use(InstagramRoute);
-app.use(UserInstagramAccountsRoute);
 app.use(UserRoute);
 
 app.use(APIMiddleware());
