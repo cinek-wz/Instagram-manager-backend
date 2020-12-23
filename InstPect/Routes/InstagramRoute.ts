@@ -58,7 +58,7 @@ Router.post('/api/instagram/similartags', [
 
 Router.get('/api/instagram/insights', [
     query('accountid').isInt()
-], InputMiddleware, CacheMiddleware(43200, `insights`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetInsights);
+], InputMiddleware, CacheMiddleware(43200, `insights`, [{ type: "query", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetInsights);
 
 Router.delete('/api/instagram/photoscheduler', [
     body('accountid').isInt(),

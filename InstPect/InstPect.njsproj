@@ -59,6 +59,7 @@ REDIS_HOST=192.168.185.241</Environment>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\GuestActions\LoginController.ts" />
     <TypeScriptCompile Include="Controllers\InstagramAccount\AddInstagramAccountController.ts" />
+    <TypeScriptCompile Include="Controllers\InstagramActions\DeleteScheduleController.ts" />
     <TypeScriptCompile Include="Controllers\InstagramActions\GetScheduleController.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
