@@ -9,6 +9,7 @@ import GetAccounts from '../Controllers/InstagramAccount/GetInstagramAccountsCon
 
 
 import PhotoSchedule from '../Controllers/InstagramActions/PhotoScheduleController';
+import GetSchedule from "../Controllers/InstagramActions/GetScheduleController";
 import GetInsights from '../Controllers/InstagramActions/GetInsightsController';
 import FindSimilarTags from '../Controllers/InstagramActions/FindSimilarTagsController';
 import GetTopPhotos from "../Controllers/InstagramActions/GetTopPhotosController";
@@ -16,7 +17,8 @@ import GetTopPhotos from "../Controllers/InstagramActions/GetTopPhotosController
 import LoggedInMiddleware from '../Middleware/AuthMiddleware';
 import OwnsInstagramAccountMiddleware from '../Middleware/OwnsInstagramAccountMiddleware';
 import InputMiddleware from '../Middleware/InputMiddleware';
-import CacheMiddleware from '../Middleware/CacheMiddleware';
+import { CacheMiddleware } from '../Middleware/CacheMiddleware';
+
 
 var Router = Express.Router();
 let MulterMiddleware = multer();
@@ -28,23 +30,23 @@ Router.use(LoggedInMiddleware);
  * User instagram account
 */
 
-Router.post('/api/instagram/addaccount', oneOf([
+Router.post('/api/instagram/account', oneOf([
     [check('login').isString(), check('password').isString()],
     [check('code').isString().isLength({ min: 4, max: 5 })]
 ]), InputMiddleware, AddAccount);
 
-Router.post('/api/instagram/removeaccount', [
+Router.delete('/api/instagram/account', [
     check('accountid').isInt()
 ], InputMiddleware, OwnsInstagramAccountMiddleware, RemoveAccount);
 
 //Enable / disable instagram account
-Router.post('/api/instagram/accountstatus', [
+Router.put('/api/instagram/account', [
     check('accountid').isInt(),
     check('status').isBoolean()
 ], InputMiddleware, OwnsInstagramAccountMiddleware, ChangeStatus);
 
 //Get all accounts with stats
-Router.post('/api/instagram/accounts', GetAccounts);
+Router.get('/api/instagram/accounts', GetAccounts);
 
 /**
  * User instagram account actions
@@ -58,6 +60,10 @@ Router.post('/api/instagram/similartags', [
 Router.post('/api/instagram/insights', [
     check('accountid').isInt()
 ], InputMiddleware, CacheMiddleware(43200, `insights`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetInsights);
+
+Router.get('/api/instagram/photoscheduler', [
+    check('accountid').isInt()
+], InputMiddleware, OwnsInstagramAccountMiddleware, GetSchedule);
 
 Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_photo'), [
     check('accountid').isInt(),
