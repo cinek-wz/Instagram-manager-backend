@@ -1,6 +1,6 @@
 import Express from 'express';
 import multer from 'multer';
-import { check, oneOf } from 'express-validator';
+import { check, oneOf, query, body } from 'express-validator';
 
 import AddAccount from '../Controllers/InstagramAccount/AddInstagramAccountController';
 import RemoveAccount from '../Controllers/InstagramAccount/RemoveInstagramAccountController';
@@ -23,7 +23,6 @@ import { CacheMiddleware } from '../Middleware/CacheMiddleware';
 var Router = Express.Router();
 let MulterMiddleware = multer();
 
-//Only for logged in users
 Router.use(LoggedInMiddleware);
 
 /**
@@ -53,26 +52,31 @@ Router.get('/api/instagram/accounts', GetAccounts);
 */
 
 Router.post('/api/instagram/similartags', [
-    check('accountid').isInt(),
-    check('tag').isString().isLength({min: 1, max: 40})
+    body('accountid').isInt(),
+    body('tag').isString().isLength({min: 1, max: 40})
 ], InputMiddleware, CacheMiddleware(21600, `similartags`, [{ type: "body", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
 
-Router.post('/api/instagram/insights', [
-    check('accountid').isInt()
+Router.get('/api/instagram/insights', [
+    query('accountid').isInt()
 ], InputMiddleware, CacheMiddleware(43200, `insights`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetInsights);
 
+Router.delete('/api/instagram/photoscheduler', [
+    body('accountid').isInt(),
+    body('scheduleid').isInt()
+], InputMiddleware, OwnsInstagramAccountMiddleware, GetSchedule);
+
 Router.get('/api/instagram/photoscheduler', [
-    check('accountid').isInt()
+    query('accountid').isInt()
 ], InputMiddleware, OwnsInstagramAccountMiddleware, GetSchedule);
 
 Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_photo'), [
-    check('accountid').isInt(),
-    check('description').isString(),
-    check('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
+    body('accountid').isInt(),
+    body('description').isString(),
+    body('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
 ], InputMiddleware, OwnsInstagramAccountMiddleware, PhotoSchedule);
 
 Router.post('/api/instagram/topphotos', [
-    check('accountid').isInt()
+    body('accountid').isInt()
 ], InputMiddleware, CacheMiddleware(43200, `topphotos`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetTopPhotos);
 
 export default Router;

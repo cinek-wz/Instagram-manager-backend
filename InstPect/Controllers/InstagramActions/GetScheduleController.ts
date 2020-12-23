@@ -7,10 +7,10 @@ export default async function GetSchedule(req, res, next)
 {
     try
     {
-        let AccountID = req.body.accountid;
+        let AccountID = req.query.accountid;
 
         let PhotoRepository = getRepository(InstagramPhoto);
-        let Photos = await PhotoRepository.find({ where: { accountid: AccountID }, select: ["id", "photo", "date", "description"] });
+        let Photos = await PhotoRepository.find({ where: { accountid: AccountID }, select: ["id", "photo", "date", "description"], order: { date: "ASC" } });
 
         return next(new APIStatus(200, Photos));
     }

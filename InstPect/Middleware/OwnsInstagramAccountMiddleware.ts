@@ -6,7 +6,7 @@ import InstagramAccount from '../Entities/InstagramAccount';
 export default async function OwnsInstagramAccountMiddleware(req, res, next) 
 {
     let UserID = req.session.userid;
-    let AccountID = req.body.accountid;
+    let AccountID = req.body.accountid || req.query.accountid;
 
     let InstagramRepository = getRepository(InstagramAccount);
 
