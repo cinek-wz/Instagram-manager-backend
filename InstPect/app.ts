@@ -3,7 +3,6 @@ import { createConnection, ConnectionOptions } from 'typeorm';
 import Express from 'express';
 import ExpressSession from 'express-session';
 import Compression from 'compression';
-import History from 'connect-history-api-fallback';
 import ConnectRedis = require('connect-redis');
 
 import { DB as Config } from './Config';
@@ -19,8 +18,9 @@ import UserRoute from './Routes/UserRoute';
 import InstagramRoute from './Routes/InstagramRoute';
 import UserInstagramAccountsRoute from './Routes/UserInstagramAccountsRoute';
 
-import { APIMiddleware } from './Middleware/APIMiddleware';
-import RateLimitMiddleware from "./Middleware/RateLimitMiddleware";
+import { APIMiddleware } from './Middleware/Main/APIMiddleware';
+import RateLimitMiddleware from "./Middleware/Main/RateLimitMiddleware";
+import { CacheAddMiddleware } from './Middleware/Main/CacheMiddleware';
 
 var RedisStore = ConnectRedis(ExpressSession);
 const app = Express();
@@ -28,7 +28,6 @@ const app = Express();
 app.set('trust proxy', true);
 app.disable('x-powered-by');
 
-app.use(History());
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 
@@ -58,6 +57,7 @@ app.use(UserInstagramAccountsRoute);
 app.use(UserRoute);
 
 app.use(APIMiddleware());
+app.use(CacheAddMiddleware());
 
 createConnection(Config.SQL as ConnectionOptions).then(async (Connection) =>
 {

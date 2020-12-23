@@ -59,6 +59,9 @@ REDIS_HOST=192.168.185.241</Environment>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\GuestActions\LoginController.ts" />
     <TypeScriptCompile Include="Controllers\InstagramAccount\AddInstagramAccountController.ts" />
+    <TypeScriptCompile Include="Controllers\InstagramActions\GetScheduleController.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Controllers\InstagramActions\GetTopPhotosController.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -82,15 +85,15 @@ REDIS_HOST=192.168.185.241</Environment>
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Entities\User.ts" />
-    <TypeScriptCompile Include="Middleware\APIMiddleware.ts" />
-    <TypeScriptCompile Include="Middleware\CacheMiddleware.ts">
+    <TypeScriptCompile Include="Middleware\Main\APIMiddleware.ts" />
+    <TypeScriptCompile Include="Middleware\Main\CacheMiddleware.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Middleware\OwnsInstagramAccountMiddleware.ts" />
-    <TypeScriptCompile Include="Middleware\AuthMiddleware.ts" />
-    <TypeScriptCompile Include="Middleware\CaptchaMiddleware.ts" />
-    <TypeScriptCompile Include="Middleware\InputMiddleware.ts" />
-    <TypeScriptCompile Include="Middleware\RateLimitMiddleware.ts">
+    <TypeScriptCompile Include="Middleware\Main\AuthMiddleware.ts" />
+    <TypeScriptCompile Include="Middleware\Main\CaptchaMiddleware.ts" />
+    <TypeScriptCompile Include="Middleware\Main\InputMiddleware.ts" />
+    <TypeScriptCompile Include="Middleware\Main\RateLimitMiddleware.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Models\InstagramBaseModel.ts">
@@ -118,6 +121,7 @@ REDIS_HOST=192.168.185.241</Environment>
     <Folder Include="Middleware\" />
     <Folder Include="Controllers\" />
     <Folder Include="Entities\" />
+    <Folder Include="Middleware\Main\" />
     <Folder Include="Models\" />
     <Folder Include="DB\" />
     <Folder Include="CronJobs\" />
