@@ -23,16 +23,24 @@ export default async function PostPhotos()
             let Account: InstagramAccount = Photo.account;
             let Client: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(Account);
 
-            let publishResult = await Client.publish.photo(
+            let Result;
+            try
             {
-                file: Photo.photo,
-                caption: Photo.description,
-            });
+                Result = await Client.publish.photo(
+                {
+                    file: Photo.photo,
+                    caption: Photo.description,
+                });
+            }
+            catch (Error)
+            {
+                console.error(Error);
+            }
 
             await PhotoRepository.delete(Photo);
-            if (publishResult.status != 'ok')
+            if (Result.status != 'ok')
             {
-                throw new Error(JSON.stringify(publishResult));
+                console.error(Result);
             }
         }
     }
