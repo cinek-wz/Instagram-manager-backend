@@ -104,9 +104,8 @@ REDIS_HOST=192.168.185.241</Environment>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
     <TypeScriptCompile Include="Models\UserModel.ts" />
-    <TypeScriptCompile Include="Routes\InstagramRoute.ts" />
     <TypeScriptCompile Include="Routes\GuestRoute.ts" />
-    <TypeScriptCompile Include="Routes\UserInstagramAccountsRoute.ts" />
+    <TypeScriptCompile Include="Routes\InstagramRoute.ts" />
     <TypeScriptCompile Include="Routes\UserRoute.ts" />
     <TypeScriptCompile Include="Utils\CronRunner.ts">
       <SubType>Code</SubType>
