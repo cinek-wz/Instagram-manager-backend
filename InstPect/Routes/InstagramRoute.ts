@@ -10,6 +10,7 @@ import GetAccounts from '../Controllers/InstagramAccount/GetInstagramAccountsCon
 
 import PhotoSchedule from '../Controllers/InstagramActions/PhotoScheduleController';
 import GetSchedule from "../Controllers/InstagramActions/GetScheduleController";
+import DeleteSchedule from "../Controllers/InstagramActions/DeleteScheduleController";
 import GetInsights from '../Controllers/InstagramActions/GetInsightsController';
 import FindSimilarTags from '../Controllers/InstagramActions/FindSimilarTagsController';
 import GetTopPhotos from "../Controllers/InstagramActions/GetTopPhotosController";
@@ -63,7 +64,7 @@ Router.get('/api/instagram/insights', [
 Router.delete('/api/instagram/photoscheduler', [
     body('accountid').isInt(),
     body('scheduleid').isInt()
-], InputMiddleware, OwnsInstagramAccountMiddleware, GetSchedule);
+], InputMiddleware, OwnsInstagramAccountMiddleware, DeleteSchedule);
 
 Router.get('/api/instagram/photoscheduler', [
     query('accountid').isInt()
