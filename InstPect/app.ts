@@ -1,4 +1,7 @@
 import "reflect-metadata";
+import "console-info";
+import "console-warn";
+import "console-error";
 import { createConnection, ConnectionOptions } from 'typeorm';
 import Express from 'express';
 import ExpressSession from 'express-session';
