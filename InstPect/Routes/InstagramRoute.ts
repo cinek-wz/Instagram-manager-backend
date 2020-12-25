@@ -55,7 +55,7 @@ Router.get('/api/instagram/accounts', GetAccounts);
 Router.post('/api/instagram/similartags', [
     body('accountid').isInt(),
     body('tag').isString().isLength({min: 1, max: 40})
-], InputMiddleware, CacheMiddleware(21600, `similartags`, [{ type: "body", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
+], InputMiddleware, CacheMiddleware(129600, `similartags`, [{ type: "body", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
 
 Router.get('/api/instagram/insights', [
     query('accountid').isInt()
