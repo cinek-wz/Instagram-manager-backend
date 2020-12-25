@@ -14,18 +14,18 @@ export class APIStatus
 
 export function APIMiddleware() 
 {
-    return async function(result: APIStatus, req, res, next) 
+    return async function(Result: APIStatus, req, res, next) 
     {
-        if (result.status == 500)
+        if (Result.status == 500)
         {
-            console.error(`Error (${req.method}} ${req.path}: ${result.data.toString()}`);
-            res.status(result.status).send();
+            console.error(`Error (${req.method}} ${req.path}: ${Result.data.toString()}`);
+            res.status(Result.status).send();
         }
         else
         {
-            res.status(result.status).send((result.data != null) ? { data: result.data } : null);
+            res.status(Result.status).send((Result.data != null) ? { data: Result.data } : null);
         }
 
-        return next(result.data);
+        return next(Result);
     }
 }

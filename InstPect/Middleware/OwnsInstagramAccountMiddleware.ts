@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { APIStatus } from './APIMiddleware';
+import { APIStatus } from './Main/APIMiddleware';
 import InstagramAccount from '../Entities/InstagramAccount';
 
 export default async function OwnsInstagramAccountMiddleware(req, res, next) 

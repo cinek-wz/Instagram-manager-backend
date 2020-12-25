@@ -1,4 +1,4 @@
-import { APIStatus } from '../APIMiddleware';
+import { APIStatus } from '../Main/APIMiddleware';
 
 export default async function LoggedInMiddleware(req, res, next) 
 {

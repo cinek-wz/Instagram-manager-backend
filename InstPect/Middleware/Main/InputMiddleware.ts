@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator/check';
-import { APIStatus } from '../APIMiddleware';
+import { APIStatus } from '../Main/APIMiddleware';
 
 export default async function UserInputMiddleware(req, res, next) 
 {

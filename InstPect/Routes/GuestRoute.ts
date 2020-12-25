@@ -3,8 +3,8 @@ import { check, oneOf } from 'express-validator';
 
 import * as LoginController from '../Controllers/GuestActions/LoginController';
 
-import InputMiddleware from '../Middleware/InputMiddleware';
-import CaptchaMiddleware from '../Middleware/CaptchaMiddleware';
+import InputMiddleware from '../Middleware/Main/InputMiddleware';
+import CaptchaMiddleware from '../Middleware/Main/CaptchaMiddleware';
 
 var Router = Express.Router();
 

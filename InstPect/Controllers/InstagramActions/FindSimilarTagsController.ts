@@ -2,7 +2,7 @@ import * as InstagramModel from '../../Models/InstagramModel';
 import * as InstagramBaseModel from '../../Models/InstagramBaseModel';
 
 
-import { APIStatus } from '../../Middleware/APIMiddleware';
+import { APIStatus } from '../../Middleware/Main/APIMiddleware';
 import ErrorEx from '../../Utils/Error';
 import InstagramAccount from '../../Entities/InstagramAccount';
 

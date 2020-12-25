@@ -3,7 +3,7 @@ import * as InstagramBaseModel from '../../Models/InstagramBaseModel';
 import { IgApiClient } from 'instagram-private-api';
 
 import InstagramAccount from '../../Entities/InstagramAccount';
-import { APIStatus } from '../../Middleware/APIMiddleware';
+import { APIStatus } from '../../Middleware/Main/APIMiddleware';
 import ErrorEx from '../../Utils/Error';
 
 export default async function GetTopPhotos(req, res, next)

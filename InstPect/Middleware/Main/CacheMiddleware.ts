@@ -1,6 +1,6 @@
 import Redis from '../../DB/Redis';
 
-import { APIStatus } from '../APIMiddleware';
+import { APIStatus } from "./APIMiddleware";
 
 export function CacheMiddleware(ExpireTime: number, Name: string, Options?: Array<{ type: "body" | "params" | "query", name: string }> | { type: "body" | "params" | "query", name: string })
 {
@@ -26,8 +26,7 @@ export function CacheMiddleware(ExpireTime: number, Name: string, Options?: Arra
         let Cache = await Redis.get(CacheName);
         if (Cache == null)
         {
-            req.cache = CacheName;
-            req.cacheexpire = ExpireTime;
+            req.cache = { name: CacheName, expire: ExpireTime };
             return next();
         }
         else
@@ -40,20 +39,23 @@ export function CacheMiddleware(ExpireTime: number, Name: string, Options?: Arra
 
 export function CacheAddMiddleware()
 {
-    return async function (Data: Object, req, res, next)
+    return async function (Result: APIStatus, req, res, next)
     {
         try
         {
-            if (Data != null && res.statusCode == 200 && req.cache != null) {
-                await Redis.set(req.cache, JSON.stringify(Data));
-                await Redis.expire(req.cache, req.cacheexpire);
+            if (res.statusCode == 200 && req.cache != null)
+            {
+                const Data = JSON.stringify(Result.data, null, 2);
 
-                console.log(`Cache created ${req.cache}`);
+                await Redis.set(req.cache.name, Data);
+                await Redis.expire(req.cache.name, req.cache.expire);
+
+                console.log(`Cache created ${req.cache.name}`);
             }
         }
         catch (Error)
         {
-            console.error(`Failed to create cache ${req.cache} ${Error.toString()}`);
+            console.error(`Failed to create cache ${req.cache.name} ${Error.toString()}`);
         }
         return next();
     }

@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { APIStatus } from '../../Middleware/APIMiddleware';
+import { APIStatus } from '../../Middleware/Main/APIMiddleware';
 import InstagramAccount from '../../Entities/InstagramAccount';
 
 

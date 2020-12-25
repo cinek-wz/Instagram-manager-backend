@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { APIStatus } from '../../Middleware/APIMiddleware';
+import { APIStatus } from '../../Middleware/Main/APIMiddleware';
 import InstagramPhoto from '../../Entities/InstagramPhoto';
 
 export default async function UploadPhotoSchedule(req, res, next)

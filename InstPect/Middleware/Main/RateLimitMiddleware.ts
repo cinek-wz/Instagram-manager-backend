@@ -1,4 +1,4 @@
-import { APIStatus } from '../APIMiddleware';
+import { APIStatus } from '../Main/APIMiddleware';
 import Redis from '../../DB/Redis';
 
 export default async function RateLimitMiddleware(req, res, next)

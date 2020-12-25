@@ -1,6 +1,6 @@
 import * as Request from 'request';
 import { Captcha } from '../../Config';
-import { APIStatus } from '../APIMiddleware';
+import { APIStatus } from '../Main/APIMiddleware';
 
 export default async function CaptchaMiddleware(req, res, next) 
 {

@@ -3,8 +3,7 @@ import { createHash } from 'crypto';
 
 import * as UserModel from '../../Models/UserModel';
 
-import { APIStatus } from '../../Middleware/APIMiddleware';
-import User from '../../Entities/User';
+import { APIStatus } from '../../Middleware/Main/APIMiddleware';
 
 export async function GetProfile(req, res, next)
 {

@@ -15,10 +15,10 @@ import GetInsights from '../Controllers/InstagramActions/GetInsightsController';
 import FindSimilarTags from '../Controllers/InstagramActions/FindSimilarTagsController';
 import GetTopPhotos from "../Controllers/InstagramActions/GetTopPhotosController";
 
-import LoggedInMiddleware from '../Middleware/AuthMiddleware';
+import LoggedInMiddleware from '../Middleware/Main/AuthMiddleware';
 import OwnsInstagramAccountMiddleware from '../Middleware/OwnsInstagramAccountMiddleware';
-import InputMiddleware from '../Middleware/InputMiddleware';
-import { CacheMiddleware } from '../Middleware/CacheMiddleware';
+import InputMiddleware from '../Middleware/Main/InputMiddleware';
+import { CacheMiddleware } from '../Middleware/Main/CacheMiddleware';
 
 
 var Router = Express.Router();
