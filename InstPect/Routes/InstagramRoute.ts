@@ -76,8 +76,8 @@ Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_p
     body('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
 ], InputMiddleware, OwnsInstagramAccountMiddleware, PhotoSchedule);
 
-Router.post('/api/instagram/topphotos', [
-    body('accountid').isInt()
-], InputMiddleware, CacheMiddleware(43200, `topphotos`, [{ type: "body", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetTopPhotos);
+Router.get('/api/instagram/topphotos', [
+    query('accountid').isInt()
+], InputMiddleware, CacheMiddleware(43200, `topphotos`, [{ type: "query", name: "accountid" }]), OwnsInstagramAccountMiddleware, GetTopPhotos);
 
 export default Router;
