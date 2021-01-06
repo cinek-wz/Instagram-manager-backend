@@ -7,7 +7,7 @@ export default class InstagramPhoto {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => InstagramAccount)
+    @ManyToOne(() => InstagramAccount, { onDelete: 'CASCADE' })
         @JoinColumn({ name: "accountid" })
         account: InstagramAccount;
 

@@ -7,7 +7,7 @@ export default class InstagramStats {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(() => InstagramAccount )
+    @OneToOne(() => InstagramAccount, { onDelete: 'CASCADE' } )
         @JoinColumn({ name: "accountid" })
         account: InstagramAccount;
 
