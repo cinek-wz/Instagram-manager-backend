@@ -18,32 +18,44 @@ export default async function UpdateStats()
 
         for (let Account of Accounts)
         {
-            let CurrentDate: Date = new Date();
-            let CurrentMonth = CurrentDate.getUTCMonth() + 1;
-            let CurrentDay = CurrentDate.getUTCDate();
-
-            let Client: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(Account);
-
-            let User = await Client.account.currentUser();
-            let UserInfo = await Client.user.info(User.pk);
-
-            let FollowerCount = UserInfo.follower_count;
-            if (Account.stats.monthcheck != CurrentMonth)
+            try
             {
-                Account.stats.monthfollowers = FollowerCount;
-                Account.stats.monthcheck = CurrentMonth;
-            }
-            if (Account.stats.daycheck != CurrentDay)
-            {
-                Account.stats.dayfollowers = FollowerCount;
-                Account.stats.daycheck = CurrentDay;
-            }
-            Account.stats.currentfollowers = FollowerCount;
+                let CurrentDate: Date = new Date();
+                let CurrentMonth = CurrentDate.getUTCMonth() + 1;
+                let CurrentDay = CurrentDate.getUTCDate();
 
-            await StatsRepository.save(Account.stats);
+                let Client: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(Account);
+
+                let User = await Client.account.currentUser();
+                let UserInfo = await Client.user.info(User.pk);
+
+                let FollowerCount = UserInfo.follower_count;
+
+                if (Account.stats == null) {
+                    Account.stats = new InstagramStats();
+                    Account.stats.accountid = Account.id;
+                }
+
+                if (Account.stats.monthcheck != CurrentMonth) {
+                    Account.stats.monthfollowers = FollowerCount;
+                    Account.stats.monthcheck = CurrentMonth;
+                }
+                if (Account.stats.daycheck != CurrentDay) {
+                    Account.stats.dayfollowers = FollowerCount;
+                    Account.stats.daycheck = CurrentDay;
+                }
+                Account.stats.currentfollowers = FollowerCount;
+
+                await StatsRepository.save(Account.stats);
+            }
+            catch (Error)
+            {
+                console.error(`Error (CRON UpdateStats): ${Account.login} ${Error}`);
+                continue;
+            }
         }
     }
-    catch(Error)
+    catch (Error)
     {
         console.error(`Error (CRON UpdateStats): ${Error}`);
         return;
