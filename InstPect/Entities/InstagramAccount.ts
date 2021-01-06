@@ -31,4 +31,13 @@ export default class InstagramAccount {
 
     @Column("text", { default: null })
     session: string;
+
+    constructor(UserID: number, Login: string, Password: string, InstagramID: string, Session: string)
+    {
+        this.userid = UserID;
+        this.login = Login;
+        this.password = Password;
+        this.instagramid = InstagramID;
+        this.session = Session;
+    }
 }

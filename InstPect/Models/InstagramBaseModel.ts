@@ -40,41 +40,13 @@ export async function InstagramClientLogin(Login: string, Password: string): Pro
 
         return { session: JSON.stringify(await IGClient.state.serialize()), id: UserData.pk };
     }
-    catch (IgCheckpointError)
+    catch (Error)
     {
-        console.log(IgCheckpointError);
+        console.log(Error);
         await IGClient.challenge.auto(true);
 
         throw new ErrorEx(1, JSON.stringify(await IGClient.state.serialize()))
     }
-}
-
-export async function InstagramAccountAdd(UserID: number, Login: string, Password: string, InstagramID: number, Session: string): Promise<void>
-{
-    let InstagramRepository = getRepository(InstagramAccount);
-
-    let AccountsCount = await InstagramRepository.count({ where: [{ instagramid: InstagramID }] });
-    if (AccountsCount > 0)
-    {
-        throw new ErrorEx(0);
-    }
-
-    let NewAccount = new InstagramAccount();
-    NewAccount.userid = UserID;
-    NewAccount.login = Login;
-    NewAccount.password = Password;
-    NewAccount.instagramid = InstagramID.toString();
-    NewAccount.session = Session;
-
-    await InstagramRepository.save(NewAccount);
-}
-
-
-
-export async function GetUserInstagramAccounts(UserID: number): Promise<Array<InstagramAccount>>
-{
-    let InstagramRepository = getRepository(InstagramAccount);
-    return await InstagramRepository.find({ where: { userid: UserID, enabled: true } });
 }
 
 export async function GetInstagramAccountClient(Account: InstagramAccount): Promise<IgApiClient>
@@ -87,20 +59,24 @@ export async function GetInstagramAccountClient(Account: InstagramAccount): Prom
         IGClient.state.generateDevice("instpect");
 
         await IGClient.state.deserialize(Account.session);
-        await IGClient.account.login(Account.login, Account.password);
+        //await IGClient.account.login(Account.login, Account.password);
+
+        IGClient.request.end$.subscribe(async () =>
+        {
+            const Session = JSON.stringify(await IGClient.state.serialize());
+
+            Account.session = Session;
+            await InstagramRepository.save(Account);
+        });
 
         return IGClient;
     }
     catch (Error)
     {
-        try
-        {
-            Account.enabled = false;
-            await InstagramRepository.save(Account);
-        }
-        catch (Error)
-        {
-            throw new ErrorEx(1);
-        }
+        Account.enabled = false;
+        await InstagramRepository.save(Account);
+
+        console.error(`Failed to login: ${Account.login}`);
+        throw new ErrorEx(3, Error);
     }
 }

@@ -100,9 +100,6 @@ REDIS_HOST=192.168.185.241</Environment>
     <TypeScriptCompile Include="Models\InstagramBaseModel.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Models\InstagramModel.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Models\LoginModel.ts" />
     <TypeScriptCompile Include="Models\UserModel.ts" />
     <TypeScriptCompile Include="Routes\GuestRoute.ts" />

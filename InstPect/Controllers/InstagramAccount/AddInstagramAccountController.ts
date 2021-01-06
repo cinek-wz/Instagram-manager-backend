@@ -1,6 +1,9 @@
 import * as InstagramBaseModel from '../../Models/InstagramBaseModel';
 
 import { APIStatus } from '../../Middleware/Main/APIMiddleware';
+import { getRepository } from "typeorm";
+import InstagramAccount from "../../Entities/InstagramAccount";
+import ErrorEx from "../../Utils/Error";
 
 export default async function AddAccount(req, res, next)
 {
@@ -23,7 +26,18 @@ export default async function AddAccount(req, res, next)
             Data = await InstagramBaseModel.InstagramClientCodeVerification(req.session.igaddstate, Code);
             req.session.igaddstate = null;
         }
-        await InstagramBaseModel.InstagramAccountAdd(UserID, Login, Password, Data.id, Data.session);
+
+        // Add account to DB
+        let InstagramRepository = getRepository(InstagramAccount);
+
+        if (await InstagramRepository.findOne({ where: [{ instagramid: Data.id }] }) != null)
+        {
+            throw new ErrorEx(0);
+        }
+
+        let NewAccount = new InstagramAccount(UserID, Login, Password, Data.id.toString(), Data.session);
+        await InstagramRepository.save(NewAccount);
+
         return next(new APIStatus(200));
     }
     catch(Error)
