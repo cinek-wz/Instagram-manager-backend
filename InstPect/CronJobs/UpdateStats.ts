@@ -23,6 +23,7 @@ export default async function UpdateStats()
             let CurrentDay = CurrentDate.getUTCDate();
 
             let Client: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(Account);
+
             let User = await Client.account.currentUser();
             let UserInfo = await Client.user.info(User.pk);
 

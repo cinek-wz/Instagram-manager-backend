@@ -52,10 +52,10 @@ Router.get('/api/instagram/accounts', GetAccounts);
  * User instagram account actions
 */
 
-Router.post('/api/instagram/similartags', [
-    body('accountid').isInt(),
-    body('tag').isString().isLength({min: 1, max: 40})
-], InputMiddleware, CacheMiddleware(129600, `similartags`, [{ type: "body", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
+Router.get('/api/instagram/similartags', [
+    query('accountid').isInt(),
+    query('tag').isString().isLength({min: 1, max: 40})
+], InputMiddleware, CacheMiddleware(129600, `similartags`, [{ type: "query", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
 
 Router.get('/api/instagram/insights', [
     query('accountid').isInt()
