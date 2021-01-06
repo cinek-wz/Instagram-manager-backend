@@ -13,6 +13,6 @@ export default class ErrorEx
     }
 
     toString() {
-        return `${this.name} ( ${this.code} ${(this.data == null ? "" : this.data)} )`;
+        return `${this.name} (${this.code})${(this.data == null ? "" : "\n" + this.data)}`;
     }
 }

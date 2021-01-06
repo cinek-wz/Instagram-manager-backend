@@ -18,7 +18,7 @@ export function APIMiddleware()
     {
         if (Result.status == 500)
         {
-            console.error(`Error (${req.method}} ${req.path}: ${Result.data.toString()}`);
+            console.error(`Error (${req.method}} ${req.path}: ${Result.data}`);
             res.status(Result.status).send();
         }
         else
