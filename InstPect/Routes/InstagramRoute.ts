@@ -54,7 +54,9 @@ Router.get('/api/instagram/accounts', GetAccounts);
 
 Router.get('/api/instagram/similartags', [
     query('accountid').isInt(),
-    query('tag').isString().isLength({min: 1, max: 40})
+    query('tag').isString().isLength({ min: 1, max: 40 }).customSanitizer(value => {
+        return value.match(/^[^.($| )]+/gm)[0].replace("#", "");
+    })
 ], InputMiddleware, CacheMiddleware(129600, `similartags`, [{ type: "query", name: "tag" }]), OwnsInstagramAccountMiddleware, FindSimilarTags);
 
 Router.get('/api/instagram/insights', [
@@ -73,7 +75,9 @@ Router.get('/api/instagram/photoscheduler', [
 Router.post('/api/instagram/photoscheduler', MulterMiddleware.single('uploaded_photo'), [
     body('accountid').isInt(),
     body('description').isString(),
-    body('date').isISO8601().custom((value) => { return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime()); })
+    body('date').isISO8601().custom((value) => {
+        return ((Date.now() > new Date(value).getTime()) ? false : new Date(value).getTime());
+    })
 ], InputMiddleware, OwnsInstagramAccountMiddleware, PhotoSchedule);
 
 Router.get('/api/instagram/topphotos', [

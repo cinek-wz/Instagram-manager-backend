@@ -10,6 +10,7 @@ export default async function FindSimilarTags(req, res, next)
     try
     {
         let Tag = req.query.tag;
+        console.log('Tag: ' + Tag);
         let InstagramAccount: InstagramAccount = req.instagramaccount;
 
         let InstagramClient: IgApiClient = await InstagramBaseModel.GetInstagramAccountClient(InstagramAccount);
