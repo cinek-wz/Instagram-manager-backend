@@ -9,7 +9,7 @@ SQL_HOST=127.0.0.1
 SQL_USER=root
 SQL_PASSWORD=
 SQL_DATABASE=igbot
-REDIS_HOST=192.168.185.241</Environment>
+REDIS_HOST=192.168.190.148</Environment>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
