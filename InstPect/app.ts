@@ -2,6 +2,7 @@ import "reflect-metadata";
 import "console-info";
 import "console-warn";
 import "console-error";
+import fs from "fs";
 import { createConnection, ConnectionOptions } from 'typeorm';
 import Express from 'express';
 import ExpressSession from 'express-session';
@@ -14,7 +15,6 @@ import CronRunner from './Utils/CronRunner';
 
 import UpdateStats from './CronJobs/UpdateStats';
 import PostPhotos from './CronJobs/PostPhotos';
-
 
 import GuestRoute from './Routes/GuestRoute';
 import UserRoute from './Routes/UserRoute';
@@ -49,7 +49,6 @@ app.use(ExpressSession(
     }));
 
 app.use(Compression());
-
 app.use(RateLimitMiddleware);
 app.use(Express.static('public'));
 
@@ -62,13 +61,16 @@ app.use(CacheAddMiddleware());
 
 createConnection(Config.SQL as ConnectionOptions).then(async (Connection) =>
 {
-    app.listen(3000, () => { console.log("Listening"); });
+    app.listen(3000, () =>
+    {
+        console.log("Listening");
 
-    // Update account stats every 15 minutes
-    let StatsRunner = new CronRunner('*/15 * * * *', UpdateStats);
+        // Update account stats every 15 minutes
+        let StatsRunner = new CronRunner('*/15 * * * *', UpdateStats);
 
-    // Check new photos to post from schedule every minute
-    let ScheduleRunner = new CronRunner('* * * * *', PostPhotos);
+        // Check new photos to post from schedule every minute
+        let ScheduleRunner = new CronRunner('* * * * *', PostPhotos);
+    });
 }).catch(Error => {
     console.error(`Database connection error: ${Error}`);
 });

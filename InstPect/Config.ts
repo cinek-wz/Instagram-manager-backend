@@ -1,6 +1,3 @@
-import User from './Entities/User';
-import InstagramAccount from './Entities/InstagramAccount';
-
 export const Captcha =
 {
     Enabled: false,

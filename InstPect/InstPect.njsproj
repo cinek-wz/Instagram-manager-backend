@@ -80,6 +80,12 @@ REDIS_HOST=192.168.190.148</Environment>
     <TypeScriptCompile Include="DB\Redis.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Entities\AutoFollowing\InstagramFollowed.ts" />
+    <TypeScriptCompile Include="Entities\AutoFollowing\InstagramCache.ts" />
+    <TypeScriptCompile Include="Entities\AutoFollowing\InstagramFollowinglist.ts" />
+    <TypeScriptCompile Include="Entities\AutoFollowing\InstagramBlacklist.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Entities\InstagramStats.ts" />
     <TypeScriptCompile Include="Entities\InstagramPhoto.ts" />
     <TypeScriptCompile Include="Entities\InstagramAccount.ts">
@@ -115,6 +121,7 @@ REDIS_HOST=192.168.190.148</Environment>
     <Folder Include="Controllers\InstagramActions\" />
     <Folder Include="Controllers\GuestActions\" />
     <Folder Include="Controllers\UserActions\" />
+    <Folder Include="Entities\AutoFollowing\" />
     <Folder Include="Middleware\" />
     <Folder Include="Controllers\" />
     <Folder Include="Entities\" />
